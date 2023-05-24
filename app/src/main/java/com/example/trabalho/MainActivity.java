@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private EditarFragment EditarFragment;
     private FragmentTransaction transaction;
 
+    private Button Salvar;
+
     public void Editar()
     {
         EditarFragment = new EditarFragment();

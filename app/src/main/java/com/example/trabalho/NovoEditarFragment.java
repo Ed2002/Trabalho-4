@@ -7,6 +7,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.example.trabalho.model.ContatoModel;
+import com.example.trabalho.model.NumeroContato;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +58,20 @@ public class NovoEditarFragment extends Fragment {
         return fragment;
     }
 
+
+    private Spinner TipoContato;
+    private String OpcoesTipoContato[] = {"Celular","Casa","Trabalho"};
+
+    private Button Salvar;
+
+
+
+    private EditText NomeContato,Telefone;
+
+
+    private String TpContact;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +85,55 @@ public class NovoEditarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_novo_editar, container, false);
+        View view = inflater.inflate(R.layout.fragment_novo_editar, container, false);
+
+        NomeContato = view.findViewById(R.id.EdTextNomeContato);
+
+        Telefone = view.findViewById(R.id.EdTextPhone);
+
+        Salvar = view.findViewById(R.id.BtnSalvar);
+
+        TipoContato = view.findViewById(R.id.SpinnerTipoContato);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                OpcoesTipoContato);
+
+        TipoContato.setAdapter(adapter);
+
+
+        TipoContato.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                TpContact = OpcoesTipoContato[i];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        Salvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ContatoModel contato = new ContatoModel();
+
+                contato.setNomeContato(NomeContato.getText().toString());
+
+                contato.setTipoContato(TpContact);
+
+                contato.setTelefone(Telefone.getText().toString());
+
+                contato.setIdContato("contato-"+contato.getNomeContato());
+
+                contato.Salvar();
+
+                Toast.makeText(getActivity().getApplicationContext(),"Dados Salvos",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
     }
+
 }

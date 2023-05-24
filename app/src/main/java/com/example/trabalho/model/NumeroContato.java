@@ -2,12 +2,12 @@ package com.example.trabalho.model;
 
 public class NumeroContato {
     private String Numero;
-    private int Tipo;
+    private String Tipo;
 
     public NumeroContato(){
     }
 
-    public NumeroContato(String numero, int tipo) {
+    public NumeroContato(String numero, String tipo) {
         Numero = numero;
         Tipo = tipo;
     }
@@ -20,11 +20,11 @@ public class NumeroContato {
         Numero = numero;
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return Tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         Tipo = tipo;
     }
 }

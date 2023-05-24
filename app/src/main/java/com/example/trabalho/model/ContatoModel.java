@@ -1,5 +1,7 @@
 package com.example.trabalho.model;
 
+import android.widget.Toast;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -8,16 +10,17 @@ import java.util.List;
 public class ContatoModel {
     private String IdContato;
     private String NomeContato;
-    private List<NumeroContato> Numeros;
+    private String TipoContato;
+    private String Telefone;
 
-    public ContatoModel(){
-
+    public ContatoModel() {
     }
 
-    public ContatoModel(String idContato, String nomeContato, List<NumeroContato> numeros) {
+    public ContatoModel(String idContato, String nomeContato, String tipoContato, String telefone) {
         IdContato = idContato;
         NomeContato = nomeContato;
-        Numeros = numeros;
+        TipoContato = tipoContato;
+        Telefone = telefone;
     }
 
     public String getIdContato() {
@@ -36,16 +39,25 @@ public class ContatoModel {
         NomeContato = nomeContato;
     }
 
-    public List<NumeroContato> getNumeros() {
-        return Numeros;
+    public String getTipoContato() {
+        return TipoContato;
     }
 
-    public void setNumeros(List<NumeroContato> numeros) {
-        Numeros = numeros;
+    public void setTipoContato(String tipoContato) {
+        TipoContato = tipoContato;
     }
 
-    public void Salvar(){
+    public String getTelefone() {
+        return Telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        Telefone = telefone;
+    }
+
+    public void Salvar()
+    {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child("Contatos").child(getIdContato()).setValue(this);
+        reference.child("usuarios").child(getIdContato()).setValue(this);
     }
 }
