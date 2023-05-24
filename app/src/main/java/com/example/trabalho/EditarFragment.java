@@ -3,23 +3,17 @@ package com.example.trabalho;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ListarFragment#newInstance} factory method to
+ * Use the {@link EditarFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListarFragment extends Fragment {
+public class EditarFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,10 +24,8 @@ public class ListarFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private MainActivity main;
-
-    public ListarFragment(MainActivity m) {
-        main = m;
+    public EditarFragment() {
+        // Required empty public constructor
     }
 
     /**
@@ -42,22 +34,17 @@ public class ListarFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ListarFragment.
+     * @return A new instance of fragment EditarFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ListarFragment newInstance(String param1, String param2, MainActivity m) {
-        ListarFragment fragment = new ListarFragment(m);
+    public static EditarFragment newInstance(String param1, String param2) {
+        EditarFragment fragment = new EditarFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-
-    private String MyList[] = {"Contato 1","Contato 2","Contato 3","Contato 4"};
-
-    private ListView ListaContatos;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,22 +59,6 @@ public class ListarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_listar, container, false);
-
-        ListaContatos = view.findViewById(R.id.ListContatos);
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
-                main,
-                android.R.layout.simple_list_item_1,
-                MyList);
-        ListaContatos.setAdapter(arrayAdapter);
-        ListaContatos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                main.Editar();
-            }
-        });
-        return  view;
-
+        return inflater.inflate(R.layout.fragment_editar, container, false);
     }
 }

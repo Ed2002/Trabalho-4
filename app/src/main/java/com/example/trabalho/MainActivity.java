@@ -15,6 +15,15 @@ public class MainActivity extends AppCompatActivity {
     private Button BtnListar, BtnNovo;
     private ListarFragment ListarFragment;
     private NovoEditarFragment NovoEditarFragment;
+    private EditarFragment EditarFragment;
+    private FragmentTransaction transaction;
+
+    public void Editar()
+    {
+        EditarFragment = new EditarFragment();
+        transaction.replace(R.id.FrameConteudo, EditarFragment);
+        transaction.commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         BtnListar = findViewById(R.id.BtnListar);
         BtnNovo = findViewById(R.id.BtnNovo);
-        ListarFragment = new ListarFragment();
+        ListarFragment = new ListarFragment(MainActivity.this);
         NovoEditarFragment = new NovoEditarFragment();
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.FrameConteudo, ListarFragment);
         transaction.commit();
 
